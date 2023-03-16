@@ -1,10 +1,14 @@
 /* Get data from Open Weather Map API */
 
 const weatherData = async () => {
+    const key = '287a8e66b21a956f402975518633bfb6';
+    const city = 'Joao Pessoa';
     try {
-        const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=Joao Pessoa&APPID=287a8e66b21a956f402975518633bfb6&units=metric', {mode: 'cors'});
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: 'cors'});
         const data = await response.json();
-        setTemperatureContainer(data);
+        console.log(data.weather[0].icon);
+        const icon = await weatherIcon(data.weather[0].icon);
+        setTemperatureContainer(data, icon);
         setAirContainer(data);
         console.log(data);
     }
@@ -15,19 +19,32 @@ const weatherData = async () => {
 
 weatherData();
 
+/* Get weather icon */
+
+const weatherIcon = async (code) => {
+    try {
+        const response = await fetch(`https://openweathermap.org/img/wn/${code}@2x.png`, {mode: 'cors'});
+        const data = await response.blob();
+        const imageObjectURL = URL.createObjectURL(data);
+        return imageObjectURL;
+    }
+    catch (error) {
+        console.error(error);
+        return '';
+    }
+}
 
 /* DOM */
 
-const setTemperatureContainer = (data) => {
+const setTemperatureContainer = (data, icon) => {
 
-    const icon = data.weather[0].icon;
     const description = data.weather[0].description;
     const temperature = Math.trunc(data.main.temp);
     const min = Math.trunc(data.main.temp_min);
     const max = Math.trunc(data.main.temp_max);
     const real_feel = Math.trunc(data.main.feels_like);
 
-    document.querySelector('.weather-icon').src = ''; // todo: get icon from api
+    document.querySelector('.weather-icon').src = icon;
     document.querySelector('.description').textContent = description;
     document.querySelector('.temperature').textContent = `${temperature}°C`;
     document.querySelector('.min-max').textContent = `Min: ${min}°C | Max: ${max}°C`;
