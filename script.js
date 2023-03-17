@@ -11,6 +11,7 @@ const weatherData = async (city) => {
         else {
             const data = await response.json();
             const icon = await weatherIcon(data.weather[0].icon);
+            setCityContainer(data);
             setTemperatureContainer(data, icon);
             setAirContainer(data);
             console.log(data);
@@ -66,6 +67,13 @@ const setAirContainer = (data) => {
    document.getElementById('visibility').textContent = `${visibility} km`;
 }
 
+const setCityContainer = (data) => {
+
+    document.getElementById('city').textContent = `${data.name}, ${data.sys.country}`;
+    initSearchInput();
+
+}
+
 const initSearchInput = () => {
 
     const button = document.getElementById('btn-search');
@@ -82,4 +90,3 @@ const initSearchInput = () => {
 /* INIT */
 
 weatherData('João Pessoa');
-initSearchInput();
