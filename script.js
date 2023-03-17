@@ -4,12 +4,17 @@ const weatherData = async (city) => {
     const key = '287a8e66b21a956f402975518633bfb6';
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: 'cors'});
-        const data = await response.json();
-        console.log(data.weather[0].icon);
-        const icon = await weatherIcon(data.weather[0].icon);
-        setTemperatureContainer(data, icon);
-        setAirContainer(data);
-        console.log(data);
+        const status = response.status;
+        if (status === 404) {
+            document.getElementById('city-error').textContent = `City not found: ${city}`;
+        }
+        else {
+            const data = await response.json();
+            const icon = await weatherIcon(data.weather[0].icon);
+            setTemperatureContainer(data, icon);
+            setAirContainer(data);
+            console.log(data);
+        }
     }
     catch (error) {
         console.error(error);
