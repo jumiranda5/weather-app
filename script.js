@@ -1,8 +1,7 @@
 /* Get data from Open Weather Map API */
 
-const weatherData = async () => {
+const weatherData = async (city) => {
     const key = '287a8e66b21a956f402975518633bfb6';
-    const city = 'Joao Pessoa';
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: 'cors'});
         const data = await response.json();
@@ -16,8 +15,6 @@ const weatherData = async () => {
         console.error(error);
     }
 }
-
-weatherData();
 
 /* Get weather icon */
 
@@ -63,3 +60,21 @@ const setAirContainer = (data) => {
    document.getElementById('pressure').textContent = `${pressure} mb`;
    document.getElementById('visibility').textContent = `${visibility} km`;
 }
+
+const initSearchInput = () => {
+
+    const button = document.getElementById('btn-search');
+
+    button.addEventListener('click', () => {
+
+        const city = document.getElementById('city-input').value;
+        weatherData(city);
+
+    });
+
+}
+
+/* INIT */
+
+weatherData('João Pessoa');
+initSearchInput();
