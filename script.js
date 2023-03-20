@@ -1,7 +1,10 @@
 /* Get data from Open Weather Map API */
 
 const weatherData = async (city) => {
+    
     const key = '287a8e66b21a956f402975518633bfb6';
+    setLoading(true);
+
     try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: 'cors'});
         const status = response.status;
@@ -16,9 +19,11 @@ const weatherData = async (city) => {
             setAirContainer(data);
             console.log(data);
         }
+        setLoading(false);
     }
     catch (error) {
         console.error(error);
+        setLoading(false);
     }
 }
 
@@ -84,6 +89,21 @@ const initSearchInput = () => {
         weatherData(city);
 
     });
+
+}
+
+const setLoading = (isLoading) => {
+
+    if (isLoading) {
+        document.querySelector('.loading').classList.remove('hidden');
+        document.querySelector('.weather-container').classList.add('hidden');
+        document.querySelector('.air-container').classList.add('hidden');
+    }
+    else {
+        document.querySelector('.loading').classList.add('hidden');
+        document.querySelector('.weather-container').classList.remove('hidden');
+        document.querySelector('.air-container').classList.remove('hidden');
+    }
 
 }
 
