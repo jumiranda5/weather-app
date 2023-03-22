@@ -6,8 +6,10 @@ const weatherData = async (city) => {
     setLoading(true);
 
     try {
+        console.log('init fetch');
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=${key}&units=metric`, {mode: 'cors'});
         const status = response.status;
+        console.log(status);
         if (status === 404) {
             document.getElementById('city-error').textContent = `City not found: ${city}`;
         }
@@ -75,7 +77,6 @@ const setAirContainer = (data) => {
 const setCityContainer = (data) => {
 
     document.getElementById('city').textContent = `${data.name}, ${data.sys.country}`;
-    initSearchInput();
 
 }
 
@@ -83,10 +84,13 @@ const initSearchInput = () => {
 
     const button = document.getElementById('btn-search');
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
 
+        e.preventDefault();
         const city = document.getElementById('city-input').value;
         weatherData(city);
+
+        console.log('button clicked');
 
     });
 
@@ -151,4 +155,5 @@ const setBackgroundImage = (icon) => {
 
 /* INIT */
 
+initSearchInput();
 weatherData('João Pessoa');
