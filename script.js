@@ -17,7 +17,7 @@ const weatherData = async (city) => {
             setCityContainer(data);
             setTemperatureContainer(data, icon);
             setAirContainer(data);
-            console.log(data);
+            setBackgroundImage(data.weather[0].icon);
         }
         setLoading(false);
     }
@@ -105,6 +105,48 @@ const setLoading = (isLoading) => {
         document.querySelector('.air-container').classList.remove('hidden');
     }
 
+}
+
+const setBackgroundImage = (icon) => {
+
+    const body = document.getElementById('body');
+    const code = icon.slice(0,-1);
+
+    // Delete bg img
+    body.classList.forEach(
+        function(name) {
+            if (name !== 'bg') {
+                body.classList.remove(name);
+            }
+        }
+    );
+
+    // Add new bg img
+    switch (code) {
+        case '01':
+            body.classList.add('bg-sun');
+            break;
+        case '02':
+            body.classList.add('bg-few-clouds');
+            break;
+        case '03':
+        case '04': 
+            body.classList.add('bg-clouds');
+            break;
+        case '09':
+        case '10': 
+            body.classList.add('bg-rain');
+            break;
+        case '11': 
+            body.classList.add('bg-thunder');
+            break;
+        case '13': 
+            body.classList.add('bg-snow');
+            break;
+        case '50':
+            body.classList.add('bg-mist');
+            break;
+    }
 }
 
 /* INIT */

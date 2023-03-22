@@ -6,11 +6,17 @@
     background-color: #333;
     color: #fff;
     font-size: 16px;
-    font-family: 'Heebo', sans-serif;;
+    font-family: 'Heebo', sans-serif;
+    --transparency: linear-gradient(rgba(0, 0 , 0, .6), rgba(0, 0 , 0, .6));
+}
+
+body {
+    height: 100vh;
+    padding: 32px 0;
 }
 
 main {
-    margin: 32px auto;
+    margin: 0 auto;
     width: 100%;
     max-width: 380px;
     min-height: 400px;
@@ -106,7 +112,7 @@ p.temperature {
 
 .air-label {
     font-weight: 300;
-    color: #ababab;
+    color: #b6b6b6;
     margin-bottom: 6px;
 }
 
@@ -114,9 +120,30 @@ p.temperature {
     display: none;
 }
 
+/* Backgrounds */
+
+.bg-sun { background-image: var(--transparency), url(./img/vicko-mozara-m82uh_vamhg-unsplash.jpg); }
+
+.bg-few-clouds { background-image: var(--transparency), url(./img/ritam-baishya-ROVBDer29PQ-unsplash.jpg); }
+
+.bg-clouds { background-image: var(--transparency), url(./img/zbynek-burival-8iZG31eXkks-unsplash.jpg); }
+
+.bg-rain { background-image: var(--transparency), url(./img/max-bender-1YHXFeOYpN0-unsplash.jpg); }
+
+.bg-thunder { background-image: var(--transparency), url(./img/david-moum-nbqlWhOVu6k-unsplash.jpg); }
+
+.bg-snow { background-image: var(--transparency), url(./img/aaron-burden-5AiWn2U10cw-unsplash.jpg); }
+
+.bg-mist { background-image: var(--transparency), url(./img/rebecca-prest-F0rQieonv3c-unsplash.jpg); }
+
+.bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 @media (min-width: 600px) {
     body {
-        min-height: 100vh;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
