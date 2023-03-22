@@ -11,29 +11,37 @@
 
 main {
     margin: 32px auto;
-    border: 1px solid yellowgreen;
     width: 100%;
-    max-width: 400px;
+    max-width: 380px;
     min-height: 400px;
 }
 
+.loading {
+    text-align: center;
+    padding: 32px;
+}
+
 .city-container {
-    border: 1px solid red;
-    padding: 16px;
+    padding: 16px 16px 0 16px;
 }
 
 .city {
-    margin-top: 16px;
+    margin-top: 32px;
     font-size: 2rem;
     font-weight: 700;
+    text-align: center;
 }
 
 .search {
-    margin-top: 12px;
+    margin-top: 16px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 }
 
 .search > input {
-    display: inline-block;
     height: 40px;
     padding: 8px;
     background-color: #161616;
@@ -42,8 +50,26 @@ main {
     color: #fff;
 }
 
-.weather-container {
-    border: 1px solid red;
+.search > button {
+    height: 40px;
+    padding: 0 12px;
+    cursor: pointer;
+    background-color: #7225d7;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.search > button:hover {
+    background-color: #8c47e5;
+}
+
+.city-error {
+    margin-top: 3px;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: #f87e7e;
 }
 
 .weather-container > p {
@@ -66,30 +92,22 @@ p.temperature {
     font-weight: 700;
 }
 
-.search > button {
-    display: inline-block;
-    height: 40px;
-    margin-top: 3px;
-    padding: 0 12px;
-    cursor: pointer;
-    background-color: #7225d7;
-    border: none;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 1rem;
-}
-
-.search > button:hover {
-    background-color: #8c47e5;
-}
-
 .air-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    gap: 32px 24px;
     padding: 16px;
-    margin-top: 16px;
-    border: 1px solid red;
+    margin-top: 32px;
+}
+
+.air-container p {
+    text-align: center;
+}
+
+.air-label {
+    font-weight: 300;
+    color: #ababab;
+    margin-bottom: 6px;
 }
 
 .hidden {
@@ -103,5 +121,17 @@ p.temperature {
         flex-flow: row wrap;
         justify-content: center;
         align-items: center;
-    }   
+    }
+
+    main {
+        max-width: 500px;
+    }
+
+    .search {
+        margin-top: 0;
+    }
+
+    .air-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
